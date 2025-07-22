@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useEffect, useRef } from 'react';
-import '../skills.css'; // Ensure this file exists and contains necessary style
 
 const skills = {
   "Programming Languages": ["Python", "C++", "JavaScript", "HTML", "CSS"],
@@ -48,57 +47,41 @@ const Skills: React.FC = () => {
             <span className="text-xs text-gray-400 mt-2">Badge views: {badgeViews}</span>
           </div>
         </div>
-        {/* Animated carousel for skill categories */}
-        <div className="overflow-hidden w-full relative" style={{ height: 240 }}>
-          <div
-            className="flex animate-scroll-x gap-8 w-max carousel-track"
-            onMouseEnter={() => {
-              const el = document.querySelector('.carousel-track');
-              if (el) el.classList.add('paused');
-            }}
-            onMouseLeave={() => {
-              const el = document.querySelector('.carousel-track');
-              if (el) el.classList.remove('paused');
-            }}
-          >
-            {Object.entries(skills).map(([category, items], idx) => {
-              return (
-                <div
-                  key={category}
-                  className="carousel-card p-6 border-2 border-cyan-500/40 rounded-2xl bg-gradient-to-br from-gray-900/60 via-cyan-900/30 to-gray-800/60 shadow-xl min-w-[300px] max-w-xs flex-shrink-0 flex flex-col items-center transition-all duration-300"
-                  style={{ marginRight: '2rem' }}
-                >
-                  <h3 className="text-2xl font-extrabold text-cyan-300 mb-4 tracking-wide drop-shadow">{category}</h3>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {items.map(skill => (
-                      <span key={skill} className="bg-gray-800 text-cyan-100 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+        <div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          onMouseLeave={() => setHoveredCategory(null)}
+        >
+          {Object.entries(skills).map(([category, items]) => {
+            const isHovered = hoveredCategory === category;
+            const isAnyHovered = hoveredCategory !== null;
+            
+            const cardClassName = `
+              p-6 border rounded-lg bg-gray-900/20 backdrop-blur-sm shadow-lg transition-all duration-300
+              ${isHovered 
+                ? 'border-cyan-500/60 shadow-cyan-500/10' 
+                : isAnyHovered 
+                ? 'border-gray-700/50 opacity-60 shadow-[0_0_10px_rgba(107,114,128,0.05)]' 
+                : 'border-gray-700/50'
+              }
+            `;
+
+            return (
+              <div 
+                key={category} 
+                className={cardClassName}
+                onMouseEnter={() => setHoveredCategory(category)}
+              >
+                <h3 className="text-xl font-bold text-cyan-400 mb-4">{category}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {items.map(skill => (
+                    <span key={skill} className="bg-gray-800 text-gray-300 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-              );
-            })}
-            {/* Duplicate for seamless loop */}
-            {Object.entries(skills).map(([category, items], idx) => {
-              return (
-                <div
-                  key={category + '-dup'}
-                  className="carousel-card p-6 border-2 border-cyan-500/40 rounded-2xl bg-gradient-to-br from-gray-900/60 via-cyan-900/30 to-gray-800/60 shadow-xl min-w-[300px] max-w-xs flex-shrink-0 flex flex-col items-center transition-all duration-300"
-                  style={{ marginRight: '2rem' }}
-                >
-                  <h3 className="text-2xl font-extrabold text-cyan-300 mb-4 tracking-wide drop-shadow">{category}</h3>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {items.map(skill => (
-                      <span key={skill + '-dup'} className="bg-gray-800 text-cyan-100 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
