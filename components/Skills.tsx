@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect, useRef } from 'react';
-import '../Skills.css';
+import '../skills.css'; // Ensure this file exists and contains necessary style
 
 const skills = {
   "Programming Languages": ["Python", "C++", "JavaScript", "HTML", "CSS"],
