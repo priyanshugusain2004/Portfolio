@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // Generate random skill levels between 19 and 69 for each skill
 function getRandomLevel() {
