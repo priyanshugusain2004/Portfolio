@@ -1,10 +1,35 @@
 import React, { useState } from 'react';
 import { useEffect, useRef } from 'react';
 
+// Generate random skill levels between 19 and 69 for each skill
+function getRandomLevel() {
+  return Math.floor(Math.random() * (69 - 19 + 1)) + 19;
+}
+
 const skills = {
-  "Programming Languages": ["Python", "C++", "JavaScript", "HTML", "CSS"],
-  "Technologies & Frameworks": ["Full Stack Web Development", "Node.js", "Express.js", "React.js", "Flask", "MongoDB"],
-  "Tools & Platforms": ["Git", "GitHub", "Cisco Packet Tracer", "Project Management", "MS Office", "Gemini API"]
+  "Programming Languages": [
+    { name: "Python", level: getRandomLevel() },
+    { name: "C++", level: getRandomLevel() },
+    { name: "JavaScript", level: getRandomLevel() },
+    { name: "HTML", level: getRandomLevel() },
+    { name: "CSS", level: getRandomLevel() }
+  ],
+  "Technologies & Frameworks": [
+    { name: "Full Stack Web Development", level: getRandomLevel() },
+    { name: "Node.js", level: getRandomLevel() },
+    { name: "Express.js", level: getRandomLevel() },
+    { name: "React.js", level: getRandomLevel() },
+    { name: "Flask", level: getRandomLevel() },
+    { name: "MongoDB", level: getRandomLevel() }
+  ],
+  "Tools & Platforms": [
+    { name: "Git", level: getRandomLevel() },
+    { name: "GitHub", level: getRandomLevel() },
+    { name: "Cisco Packet Tracer", level: getRandomLevel() },
+    { name: "Project Management", level: getRandomLevel() },
+    { name: "MS Office", level: getRandomLevel() },
+    { name: "Gemini API", level: getRandomLevel() }
+  ]
 };
 
 const Skills: React.FC = () => {
@@ -72,11 +97,20 @@ const Skills: React.FC = () => {
                 onMouseEnter={() => setHoveredCategory(category)}
               >
                 <h3 className="text-xl font-bold text-cyan-400 mb-4">{category}</h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-col gap-4">
                   {items.map(skill => (
-                    <span key={skill} className="bg-gray-800 text-gray-300 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
-                      {skill}
-                    </span>
+                    <div key={skill.name} className="w-full">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-gray-300 text-sm font-medium">{skill.name}</span>
+                        <span className="text-cyan-400 text-xs font-bold">{skill.level}%</span>
+                      </div>
+                      <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-full transition-all duration-700"
+                          style={{ width: `${skill.level}%` }}
+                        ></div>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>

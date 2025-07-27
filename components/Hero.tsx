@@ -9,6 +9,19 @@ const Hero: React.FC = () => {
 
   return (
     <section id="home" className="h-screen flex flex-col justify-center items-center text-center p-4 relative">
+      {/* Top right Download Resume button */}
+      <div className="absolute top-6 right-8 z-20">
+        <a
+          href="/public/resume.pdf"
+          download
+          className="inline-block px-6 py-2 bg-black text-white rounded shadow border border-cyan-400 border-[1.5px] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          style={{ boxShadow: '0 0 8px 2px #22d3ee' }}
+          onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 24px 6px #22d3ee')}
+          onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 8px 2px #22d3ee')}
+        >
+          Download Resume
+        </a>
+      </div>
       <div className="z-10">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
           Hi, I'm Priyanshu Gusain
