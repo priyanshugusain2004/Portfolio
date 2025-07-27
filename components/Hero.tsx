@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
       {/* Top right Download Resume button */}
       <div className="absolute top-6 right-8 z-20">
         <a
-          href="/public/resume.pdf"
+          href="https://drive.google.com/file/d/1R2yb11hEOxXBaBgQiJRCSGkMnrVlRnJh/view?usp=drive_link"
           download
           className="inline-block px-6 py-2 bg-black text-white rounded shadow border border-cyan-400 border-[1.5px] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
           style={{ boxShadow: '0 0 8px 2px #22d3ee' }}
